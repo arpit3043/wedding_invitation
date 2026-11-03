@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+:root {
+  --ivory: #f8f5ef;
+  --champagne: #e9ddc9;
+  --dusty-rose: #d9b9b4;
+  --sage: #a7b19a;
+  --wine: #713d4a;
+  --gold: #b69a68;
+  --blush: #f1e5e1;
+  --ink: #3d2e32;
+  --ink-soft: #6b5559;
+  --paper: #fbf8f3;
+  --background: var(--ivory);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-ivory: var(--ivory);
+  --color-champagne: var(--champagne);
+  --color-dusty-rose: var(--dusty-rose);
+  --color-sage: var(--sage);
+  --color-wine: var(--wine);
+  --color-gold: var(--gold);
+  --color-blush: var(--blush);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-paper: var(--paper);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-display: var(--font-playfair);
+  --font-heading: var(--font-cormorant);
+  --font-body: var(--font-dm-sans);
+  --font-devanagari: var(--font-noto-devanagari);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--dusty-rose) 55%, white);
+  color: var(--wine);
+}
+
+.ornament-border {
+  border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
+  box-shadow: inset 0 0 0 6px color-mix(in srgb, var(--champagne) 55%, transparent);
+}
+
+.paper-texture {
+  background-image:
+    radial-gradient(ellipse at 20% 0%, color-mix(in srgb, var(--blush) 55%, transparent), transparent 50%),
+    radial-gradient(ellipse at 80% 10%, color-mix(in srgb, var(--champagne) 60%, transparent), transparent 45%),
+    radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--sage) 18%, transparent), transparent 40%),
+    linear-gradient(180deg, var(--ivory), var(--paper));
+}
+
+.floral-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23B69A68' fill-opacity='0.07'%3E%3Cpath d='M40 20c2 6 6 10 12 12-6 2-10 6-12 12-2-6-6-10-12-12 6-2 10-6 12-12zm0 28c1 3 3 5 6 6-3 1-5 3-6 6-1-3-3-5-6-6 3-1 5-3 6-6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.accent-wine {
+  --accent: var(--wine);
+  --accent-soft: color-mix(in srgb, var(--wine) 12%, white);
+}
+.accent-rose {
+  --accent: #9a6d6a;
+  --accent-soft: color-mix(in srgb, var(--dusty-rose) 35%, white);
+}
+.accent-sage {
+  --accent: #6f7a62;
+  --accent-soft: color-mix(in srgb, var(--sage) 30%, white);
+}
+.accent-gold {
+  --accent: #8f7648;
+  --accent-soft: color-mix(in srgb, var(--gold) 28%, white);
+}
+.accent-champagne {
+  --accent: #8a7350;
+  --accent-soft: color-mix(in srgb, var(--champagne) 45%, white);
+}
+
+@keyframes petal-fall {
+  0% {
+    transform: translate3d(0, -12vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--drift, 20px), 110vh, 0) rotate(360deg);
+    opacity: 0.15;
+  }
+}
+
+.falling-particle {
+  animation-name: petal-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .falling-particle {
+    display: none !important;
+  }
+}
