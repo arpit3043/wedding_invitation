@@ -1,27 +1,18 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { wedding } from "@/data/wedding";
 import { useCountdown } from "@/hooks/useCountdown";
-import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { SectionReveal } from "@/components/SectionReveal";
 
 function Digit({ value, label }: { value: number; label: string }) {
-  const reduce = usePrefersReducedMotion();
   const display = String(value).padStart(2, "0");
 
   return (
     <div className="flex min-w-[3.6rem] flex-col items-center sm:min-w-[5.5rem]">
       <div className="relative overflow-hidden rounded-sm bg-blush/60 px-2.5 py-3 sm:px-4 sm:py-5">
-        <motion.span
-          key={display}
-          initial={reduce ? false : { y: 12, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.35 }}
-          className="block font-[family-name:var(--font-playfair)] text-2xl text-wine sm:text-5xl"
-        >
+        <span className="block font-[family-name:var(--font-playfair)] text-2xl text-wine sm:text-5xl">
           {display}
-        </motion.span>
+        </span>
       </div>
       <span className="mt-3 font-[family-name:var(--font-cormorant)] text-xs tracking-[0.2em] uppercase text-ink-soft sm:text-sm">
         {label}
@@ -60,7 +51,10 @@ export function Countdown() {
             The celebration has begun.
           </p>
         ) : (
-          <div className="mt-8 flex flex-wrap items-start justify-center gap-2 sm:mt-10 sm:gap-5" aria-live="polite">
+          <div
+            className="mt-8 flex flex-wrap items-start justify-center gap-2 sm:mt-10 sm:gap-5"
+            aria-live="polite"
+          >
             <Digit value={ready ? days : 0} label="Days" />
             <Digit value={ready ? hours : 0} label="Hours" />
             <Digit value={ready ? minutes : 0} label="Minutes" />

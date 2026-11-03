@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useState } from "react";
 import { wedding } from "@/data/wedding";
 import {
@@ -24,23 +23,18 @@ export function OpeningInvitation({ onOpened, onUnlockMusic }: Props) {
     if (opening) return;
     onUnlockMusic();
     setOpening(true);
-    window.setTimeout(() => onOpened(), reduce ? 200 : 900);
+    window.setTimeout(() => onOpened(), reduce ? 200 : 700);
   };
 
   return (
-    <motion.div
-      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain paper-texture floral-pattern sm:items-center"
+    <div
+      className={`fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain paper-texture floral-pattern transition-opacity duration-700 sm:items-center ${
+        opening ? "pointer-events-none opacity-0" : "opacity-100"
+      }`}
       style={{
         paddingTop: "max(1rem, env(safe-area-inset-top))",
         paddingBottom: "max(1rem, env(safe-area-inset-bottom))",
       }}
-      initial={false}
-      animate={
-        opening
-          ? { opacity: 0, scale: reduce ? 1 : 1.04 }
-          : { opacity: 1, scale: 1 }
-      }
-      transition={{ duration: reduce ? 0.2 : 0.85, ease: [0.22, 1, 0.36, 1] }}
     >
       <FloralCorner className="absolute left-2 top-2 h-14 w-14 text-gold/45 sm:left-8 sm:top-8 sm:h-28 sm:w-28" />
       <FloralCorner
@@ -55,7 +49,7 @@ export function OpeningInvitation({ onOpened, onUnlockMusic }: Props) {
 
       <MandalaMotif className="pointer-events-none absolute left-1/2 top-1/2 h-[min(92vw,420px)] w-[min(92vw,420px)] -translate-x-1/2 -translate-y-1/2 text-gold/20 sm:h-[min(90vw,520px)] sm:w-[min(90vw,520px)]" />
 
-      <div className="relative mx-3 my-4 w-full max-w-lg ornament-border bg-ivory/92 px-4 py-6 text-center shadow-sm backdrop-blur-[2px] sm:mx-4 sm:my-8 sm:px-10 sm:py-12">
+      <div className="relative mx-3 my-4 w-full max-w-lg ornament-border bg-ivory/92 px-4 py-6 text-center shadow-sm sm:mx-4 sm:my-8 sm:px-10 sm:py-12">
         <ArchFrame className="pointer-events-none absolute inset-x-3 top-3 mx-auto hidden h-[88%] w-[calc(100%-1.5rem)] text-gold/35 sm:inset-x-6 sm:top-4 sm:block sm:w-[calc(100%-3rem)]" />
 
         <p className="relative font-[family-name:var(--font-noto-devanagari)] text-sm text-wine/80 sm:text-lg">
@@ -80,12 +74,10 @@ export function OpeningInvitation({ onOpened, onUnlockMusic }: Props) {
           {wedding.celebrationShort}
         </p>
 
-        <div className="relative">
-          <ScratchCard
-            revealText="04 December 2026"
-            onInteract={onUnlockMusic}
-          />
-        </div>
+        <ScratchCard
+          revealText="04 December 2026"
+          onInteract={onUnlockMusic}
+        />
 
         <button
           type="button"
@@ -96,6 +88,6 @@ export function OpeningInvitation({ onOpened, onUnlockMusic }: Props) {
           Open Invitation
         </button>
       </div>
-    </motion.div>
+    </div>
   );
 }

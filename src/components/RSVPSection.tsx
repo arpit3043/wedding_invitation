@@ -1,6 +1,5 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { wedding, type AttendanceStatus } from "@/data/wedding";
 import { DividerOrnament } from "@/components/DecorativeElements";
@@ -129,27 +128,16 @@ export function RSVPSection() {
           {wedding.rsvp.description}
         </p>
 
-        <AnimatePresence mode="wait">
-          {phase === "success" ? (
-            <motion.div
-              key="success"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className="mt-10 rounded-sm border border-gold/40 bg-ivory/80 p-6 text-left sm:p-8"
-            >
+        {phase === "success" ? (
+            <div className="mt-10 rounded-sm border border-gold/40 bg-ivory/80 p-6 text-left sm:p-8">
               <p className="font-[family-name:var(--font-cormorant)] text-xl leading-relaxed text-wine sm:text-2xl">
                 {confirmation}
               </p>
-            </motion.div>
+            </div>
           ) : (
-            <motion.form
-              key="form"
+            <form
               className="mt-10 space-y-5 text-left"
               onSubmit={(e) => e.preventDefault()}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
             >
               <label className="block">
                 <span className="font-[family-name:var(--font-cormorant)] text-sm tracking-wide text-ink">
@@ -230,9 +218,8 @@ export function RSVPSection() {
                   {error}
                 </p>
               ) : null}
-            </motion.form>
+            </form>
           )}
-        </AnimatePresence>
       </SectionReveal>
     </section>
   );

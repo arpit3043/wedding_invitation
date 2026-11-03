@@ -1,6 +1,5 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
 import { MessageCircle, Send, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { wedding } from "@/data/wedding";
@@ -93,125 +92,114 @@ export function AIAssistant() {
         <span className="hidden sm:inline">{wedding.assistant.name}</span>
       </button>
 
-      <AnimatePresence>
-        {open ? (
-          <motion.div
-            className="fixed inset-0 z-[60] flex items-end justify-end p-0 sm:items-end sm:p-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+      {open ? (
+        <div className="fixed inset-0 z-[60] flex items-end justify-end p-0 sm:items-end sm:p-6">
+          <button
+            type="button"
+            className="absolute inset-0 bg-ink/25 sm:bg-ink/20"
+            aria-label="Close assistant"
+            onClick={() => setOpen(false)}
+          />
+          <div
+            role="dialog"
+            aria-label={wedding.assistant.name}
+            className="relative flex h-[min(100dvh,100vh)] w-full flex-col border border-champagne bg-ivory shadow-2xl sm:h-[min(80vh,620px)] sm:max-w-md sm:rounded-sm"
+            style={{
+              paddingBottom: "env(safe-area-inset-bottom)",
+            }}
           >
-            <button
-              type="button"
-              className="absolute inset-0 bg-ink/25 sm:bg-ink/20"
-              aria-label="Close assistant"
-              onClick={() => setOpen(false)}
-            />
-            <motion.div
-              role="dialog"
-              aria-label={wedding.assistant.name}
-              className="relative flex h-[min(100dvh,100vh)] w-full flex-col border border-champagne bg-ivory shadow-2xl sm:h-[min(80vh,620px)] sm:max-w-md sm:rounded-sm"
-              style={{
-                paddingBottom: "env(safe-area-inset-bottom)",
-              }}
-              initial={{ y: 40, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 24, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <header className="flex items-start justify-between border-b border-champagne px-5 py-4">
-                <div>
-                  <h2 className="font-[family-name:var(--font-playfair)] text-xl text-wine">
-                    {wedding.assistant.name}
-                  </h2>
-                  <p className="mt-1 text-sm text-ink-soft">
-                    {wedding.assistant.supportingText}
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  className="rounded-full p-1.5 text-ink-soft hover:bg-blush"
-                  aria-label="Close"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </header>
-
-              <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
-                {messages.map((m) => (
-                  <div
-                    key={m.id}
-                    className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
-                  >
-                    <div
-                      className={`max-w-[85%] rounded-sm px-3.5 py-2.5 text-sm leading-relaxed ${
-                        m.role === "user"
-                          ? "bg-wine text-ivory"
-                          : "bg-blush/70 text-ink"
-                      }`}
-                    >
-                      {m.content}
-                    </div>
-                  </div>
-                ))}
-                {loading ? (
-                  <p className="text-sm text-ink-soft" aria-live="polite">
-                    Thinking…
-                  </p>
-                ) : null}
-                {error ? (
-                  <p className="text-sm text-wine" role="alert">
-                    {error}
-                  </p>
-                ) : null}
-                <div ref={endRef} />
+            <header className="flex items-start justify-between border-b border-champagne px-5 py-4">
+              <div>
+                <h2 className="font-[family-name:var(--font-playfair)] text-xl text-wine">
+                  {wedding.assistant.name}
+                </h2>
+                <p className="mt-1 text-sm text-ink-soft">
+                  {wedding.assistant.supportingText}
+                </p>
               </div>
-
-              {messages.length <= 1 ? (
-                <div className="flex flex-wrap gap-2 border-t border-champagne/70 px-4 py-3">
-                  {suggestions.map((s) => (
-                    <button
-                      key={s}
-                      type="button"
-                      onClick={() => ask(s)}
-                      className="rounded-full border border-champagne bg-paper px-3 py-1.5 text-left text-xs text-ink-soft transition hover:border-gold hover:text-wine"
-                    >
-                      {s}
-                    </button>
-                  ))}
-                </div>
-              ) : null}
-
-              <form
-                className="flex gap-2 border-t border-champagne p-3"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  ask(input);
-                }}
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="rounded-full p-1.5 text-ink-soft hover:bg-blush"
+                aria-label="Close"
               >
-                <input
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask about timings, venues, rituals…"
-                  className="flex-1 border border-champagne bg-paper px-3 py-3 text-base outline-none focus:border-gold"
-                  disabled={loading}
-                  aria-label="Your question"
-                  enterKeyHint="send"
-                />
-                <button
-                  type="submit"
-                  disabled={loading || !input.trim()}
-                  className="touch-target inline-flex items-center justify-center bg-wine px-3 text-ivory disabled:opacity-50"
-                  aria-label="Send question"
+                <X className="h-5 w-5" />
+              </button>
+            </header>
+
+            <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
+              {messages.map((m) => (
+                <div
+                  key={m.id}
+                  className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
                 >
-                  <Send className="h-4 w-4" />
-                </button>
-              </form>
-            </motion.div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+                  <div
+                    className={`max-w-[85%] rounded-sm px-3.5 py-2.5 text-sm leading-relaxed ${
+                      m.role === "user"
+                        ? "bg-wine text-ivory"
+                        : "bg-blush/70 text-ink"
+                    }`}
+                  >
+                    {m.content}
+                  </div>
+                </div>
+              ))}
+              {loading ? (
+                <p className="text-sm text-ink-soft" aria-live="polite">
+                  Thinking…
+                </p>
+              ) : null}
+              {error ? (
+                <p className="text-sm text-wine" role="alert">
+                  {error}
+                </p>
+              ) : null}
+              <div ref={endRef} />
+            </div>
+
+            {messages.length <= 1 ? (
+              <div className="flex flex-wrap gap-2 border-t border-champagne/70 px-4 py-3">
+                {suggestions.map((s) => (
+                  <button
+                    key={s}
+                    type="button"
+                    onClick={() => ask(s)}
+                    className="rounded-full border border-champagne bg-paper px-3 py-1.5 text-left text-xs text-ink-soft transition hover:border-gold hover:text-wine"
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            ) : null}
+
+            <form
+              className="flex gap-2 border-t border-champagne p-3"
+              onSubmit={(e) => {
+                e.preventDefault();
+                ask(input);
+              }}
+            >
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Ask about timings, venues, rituals…"
+                className="flex-1 border border-champagne bg-paper px-3 py-3 text-base outline-none focus:border-gold"
+                disabled={loading}
+                aria-label="Your question"
+                enterKeyHint="send"
+              />
+              <button
+                type="submit"
+                disabled={loading || !input.trim()}
+                className="touch-target inline-flex items-center justify-center bg-wine px-3 text-ivory disabled:opacity-50"
+                aria-label="Send question"
+              >
+                <Send className="h-4 w-4" />
+              </button>
+            </form>
+          </div>
+        </div>
+      ) : null}
     </>
   );
 }
