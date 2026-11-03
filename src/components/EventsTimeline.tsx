@@ -39,23 +39,23 @@ function EventBlock({
         />
       ) : null}
 
-      <article className="rounded-sm border border-champagne/80 bg-[var(--accent-soft)]/60 p-5 sm:p-7">
+      <article className="rounded-sm border border-champagne/80 bg-[var(--accent-soft)]/60 p-4 sm:p-7">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <p className="font-[family-name:var(--font-cormorant)] text-sm tracking-[0.18em] uppercase text-[var(--accent)]">
               {event.dateLabel}
             </p>
             <div className="mt-1 flex items-center gap-2">
-              <h3 className="font-[family-name:var(--font-playfair)] text-2xl text-wine sm:text-3xl">
+              <h3 className="font-[family-name:var(--font-playfair)] text-xl text-wine sm:text-3xl">
                 {event.name}
               </h3>
               <button
                 type="button"
                 onClick={() => onInfo(event)}
-                className="rounded-full p-1.5 text-[var(--accent)] transition hover:bg-ivory/80"
+                className="touch-target inline-flex items-center justify-center rounded-full p-2 text-[var(--accent)] transition hover:bg-ivory/80"
                 aria-label={`Learn about ${event.name}`}
               >
-                <Info className="h-4 w-4" />
+                <Info className="h-5 w-5" />
               </button>
             </div>
             <p className="mt-1 font-[family-name:var(--font-cormorant)] text-lg text-ink-soft">
@@ -78,12 +78,12 @@ function EventBlock({
           </div>
         </div>
 
-        <div className="mt-5 flex flex-wrap gap-3">
+        <div className="mt-5 grid grid-cols-1 gap-2.5 sm:flex sm:flex-wrap sm:gap-3">
           <a
             href={getGoogleMapsUrl(event)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 border border-[var(--accent)]/40 bg-ivory/70 px-4 py-2 text-sm text-wine transition hover:bg-ivory"
+            className="inline-flex min-h-11 items-center justify-center gap-2 border border-[var(--accent)]/40 bg-ivory/70 px-4 py-2.5 text-sm text-wine transition hover:bg-ivory"
           >
             <Navigation className="h-4 w-4" />
             Directions
@@ -92,7 +92,7 @@ function EventBlock({
             href={getGoogleCalendarUrl(event)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 border border-gold/50 bg-champagne/30 px-4 py-2 text-sm text-wine transition hover:bg-champagne/55"
+            className="inline-flex min-h-11 items-center justify-center gap-2 border border-gold/50 bg-champagne/30 px-4 py-2.5 text-sm text-wine transition hover:bg-champagne/55"
           >
             <CalendarPlus className="h-4 w-4" />
             Add to Calendar
@@ -109,7 +109,7 @@ export function EventsTimeline() {
   return (
     <section
       id="celebrations"
-      className="px-6 py-24 sm:py-32"
+      className="px-4 py-16 sm:px-6 sm:py-32"
       aria-labelledby="celebrations-heading"
     >
       <SectionReveal className="mx-auto max-w-2xl text-center">

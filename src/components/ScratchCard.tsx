@@ -83,7 +83,7 @@ export function ScratchCard({
     const rect = canvas.getBoundingClientRect();
     const x = clientX - rect.left;
     const y = clientY - rect.top;
-    const radius = Math.max(18, rect.width * 0.06);
+    const radius = Math.max(24, rect.width * 0.09);
 
     ctx.globalCompositeOperation = "destination-out";
     ctx.beginPath();
@@ -115,13 +115,13 @@ export function ScratchCard({
   };
 
   return (
-    <div className="relative mx-auto mt-8 w-full max-w-xs">
+    <div className="relative mx-auto mt-5 w-full max-w-sm sm:mt-8 sm:max-w-xs">
       <p className="mb-2 text-center font-[family-name:var(--font-cormorant)] text-xs tracking-[0.18em] uppercase text-gold">
         A little surprise
       </p>
       <div
         ref={containerRef}
-        className="relative h-24 overflow-hidden rounded-sm border border-gold/45 bg-blush/70 shadow-inner select-none"
+        className="relative h-28 overflow-hidden rounded-sm border border-gold/45 bg-blush/70 shadow-inner select-none touch-none sm:h-24"
       >
         <div className="absolute inset-0 flex flex-col items-center justify-center px-3 text-center">
           <p className="font-[family-name:var(--font-cormorant)] text-xs tracking-[0.16em] uppercase text-ink-soft">

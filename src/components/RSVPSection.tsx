@@ -111,7 +111,7 @@ export function RSVPSection() {
   return (
     <section
       id="rsvp"
-      className="border-t border-champagne/80 bg-gradient-to-b from-ivory via-blush/35 to-champagne/40 px-6 py-24 sm:py-32"
+      className="border-t border-champagne/80 bg-gradient-to-b from-ivory via-blush/35 to-champagne/40 px-4 py-16 sm:px-6 sm:py-32"
       aria-labelledby="rsvp-heading"
     >
       <SectionReveal className="mx-auto max-w-xl text-center">
@@ -161,9 +161,10 @@ export function RSVPSection() {
                   onChange={(e) => setName(e.target.value)}
                   autoComplete="name"
                   placeholder="How should we address you?"
-                  className="mt-2 w-full border border-champagne bg-ivory/90 px-4 py-3 text-ink outline-none transition focus:border-gold"
+                  className="mt-2 w-full border border-champagne bg-ivory/90 px-4 py-3.5 text-base text-ink outline-none transition focus:border-gold"
                   disabled={loading}
                   required
+                  enterKeyHint="next"
                 />
               </label>
 
@@ -173,13 +174,15 @@ export function RSVPSection() {
                 </span>
                 <input
                   type="tel"
+                  inputMode="tel"
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
                   autoComplete="tel"
                   placeholder="So we can reach you"
-                  className="mt-2 w-full border border-champagne bg-ivory/90 px-4 py-3 text-ink outline-none transition focus:border-gold"
+                  className="mt-2 w-full border border-champagne bg-ivory/90 px-4 py-3.5 text-base text-ink outline-none transition focus:border-gold"
                   disabled={loading}
                   required
+                  enterKeyHint="next"
                 />
               </label>
 
@@ -194,17 +197,17 @@ export function RSVPSection() {
                   rows={3}
                   maxLength={500}
                   placeholder="Share a wish, blessing, or note for Arpit & Muskan"
-                  className="mt-2 w-full resize-y border border-champagne bg-ivory/90 px-4 py-3 text-ink outline-none transition focus:border-gold"
+                  className="mt-2 w-full resize-y border border-champagne bg-ivory/90 px-4 py-3.5 text-base text-ink outline-none transition focus:border-gold"
                   disabled={loading}
                 />
               </label>
 
-              <div className="grid gap-3 pt-1 sm:grid-cols-2">
+              <div className="grid gap-2.5 pt-1 sm:grid-cols-2 sm:gap-3">
                 <button
                   type="button"
                   disabled={loading}
                   onClick={() => submit("attending")}
-                  className="border border-wine/30 bg-wine px-4 py-4 text-sm tracking-wide text-ivory transition hover:bg-wine/90 disabled:opacity-60"
+                  className="min-h-12 border border-wine/30 bg-wine px-3 py-3.5 text-sm tracking-wide text-ivory transition hover:bg-wine/90 active:scale-[0.99] disabled:opacity-60"
                 >
                   {loading && status === "attending"
                     ? "Saving…"
@@ -214,7 +217,7 @@ export function RSVPSection() {
                   type="button"
                   disabled={loading}
                   onClick={() => submit("unable")}
-                  className="border border-ink-soft/25 bg-ivory px-4 py-4 text-sm tracking-wide text-ink-soft transition hover:bg-blush/60 disabled:opacity-60"
+                  className="min-h-12 border border-ink-soft/25 bg-ivory px-3 py-3.5 text-sm leading-snug tracking-wide text-ink-soft transition hover:bg-blush/60 active:scale-[0.99] disabled:opacity-60"
                 >
                   {loading && status === "unable"
                     ? "Saving…"

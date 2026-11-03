@@ -82,10 +82,14 @@ export function AIAssistant() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="fixed bottom-5 right-5 z-40 flex items-center gap-2 rounded-full border border-champagne bg-wine px-4 py-3 text-sm text-ivory shadow-lg transition hover:bg-wine/90 sm:bottom-8 sm:right-8"
+        className="fixed z-40 flex min-h-12 min-w-12 items-center justify-center gap-2 rounded-full border border-champagne bg-wine px-3.5 py-3 text-sm text-ivory shadow-lg transition hover:bg-wine/90 active:scale-95 sm:bottom-8 sm:right-8 sm:px-4"
+        style={{
+          bottom: "max(1.25rem, env(safe-area-inset-bottom))",
+          right: "max(1rem, env(safe-area-inset-right))",
+        }}
         aria-label="Open Ask Arpit & Muskan assistant"
       >
-        <MessageCircle className="h-4 w-4" />
+        <MessageCircle className="h-5 w-5" />
         <span className="hidden sm:inline">{wedding.assistant.name}</span>
       </button>
 
@@ -106,7 +110,10 @@ export function AIAssistant() {
             <motion.div
               role="dialog"
               aria-label={wedding.assistant.name}
-              className="relative flex h-[min(92vh,640px)] w-full flex-col border border-champagne bg-ivory shadow-2xl sm:h-[min(80vh,620px)] sm:max-w-md sm:rounded-sm"
+              className="relative flex h-[min(100dvh,100vh)] w-full flex-col border border-champagne bg-ivory shadow-2xl sm:h-[min(80vh,620px)] sm:max-w-md sm:rounded-sm"
+              style={{
+                paddingBottom: "env(safe-area-inset-bottom)",
+              }}
               initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 24, opacity: 0 }}
@@ -187,14 +194,15 @@ export function AIAssistant() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask about timings, venues, rituals…"
-                  className="flex-1 border border-champagne bg-paper px-3 py-2.5 text-sm outline-none focus:border-gold"
+                  className="flex-1 border border-champagne bg-paper px-3 py-3 text-base outline-none focus:border-gold"
                   disabled={loading}
                   aria-label="Your question"
+                  enterKeyHint="send"
                 />
                 <button
                   type="submit"
                   disabled={loading || !input.trim()}
-                  className="bg-wine px-3 text-ivory disabled:opacity-50"
+                  className="touch-target inline-flex items-center justify-center bg-wine px-3 text-ivory disabled:opacity-50"
                   aria-label="Send question"
                 >
                   <Send className="h-4 w-4" />

@@ -92,10 +92,14 @@ export const MusicToggle = forwardRef<MusicController, Props>(
       <button
         type="button"
         onClick={toggle}
-        className="fixed bottom-5 left-5 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-champagne bg-ivory/90 text-wine shadow-md backdrop-blur transition hover:bg-blush sm:bottom-8 sm:left-8"
-        aria-label={playing ? "Mute music" : "Play wedding music"}
-        title={playing ? "Mute music" : "Play music"}
-      >
+className="fixed z-40 flex h-12 w-12 items-center justify-center rounded-full border border-champagne bg-ivory/95 text-wine shadow-md backdrop-blur transition hover:bg-blush active:scale-95 sm:h-11 sm:w-11"
+      style={{
+        bottom: "max(1.25rem, env(safe-area-inset-bottom))",
+        left: "max(1rem, env(safe-area-inset-left))",
+      }}
+      aria-label={playing ? "Mute music" : "Play wedding music"}
+      title={playing ? "Mute music" : "Play music"}
+    >
         {playing ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
       </button>
     );

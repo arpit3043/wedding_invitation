@@ -3,7 +3,7 @@ import { DividerOrnament } from "@/components/DecorativeElements";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-champagne bg-wine px-6 py-14 text-center text-blush">
+    <footer className="border-t border-champagne bg-wine px-4 py-10 text-center text-blush sm:px-6 sm:py-14" style={{ paddingBottom: "max(2.5rem, env(safe-area-inset-bottom))" }}>
       <p className="font-[family-name:var(--font-noto-devanagari)] text-sm opacity-80">
         {wedding.sanskritInvocation}
       </p>

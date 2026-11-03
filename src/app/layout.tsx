@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import {
   Cormorant_Garamond,
   DM_Sans,
@@ -34,9 +34,25 @@ const notoDevanagari = Noto_Sans_Devanagari({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+  themeColor: "#F8F5EF",
+};
+
 export const metadata: Metadata = {
   title: `${wedding.coupleNames} · Wedding Invitation`,
   description: wedding.metaDescription,
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  ),
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: wedding.coupleNames,
+  },
   openGraph: {
     title: `${wedding.coupleNames} · Wedding Invitation`,
     description: wedding.metaDescription,
@@ -64,7 +80,7 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${cormorant.variable} ${dmSans.variable} ${notoDevanagari.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-ivory font-[family-name:var(--font-dm-sans)] text-ink">
+      <body className="min-h-full overflow-x-hidden bg-ivory font-[family-name:var(--font-dm-sans)] text-ink antialiased">
         {children}
       </body>
     </html>

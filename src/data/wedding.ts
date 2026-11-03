@@ -35,7 +35,7 @@ export const wedding = {
   timezone: "Asia/Kolkata",
   sanskritInvocation: "॥ श्री गणेशाय नमः ॥",
   openingText:
-    "With the blessings of the Almighty and the love of our families, we invite you to join us as we celebrate the beginning of our forever.",
+    "With the blessings of the Lord Shiva and the blessings of our families, we invite you to join us as we celebrate the beginning of our forever.",
   supportingLine: "Two families, two hearts, one beautiful beginning.",
   togetherLine: "Together with our families",
   story: {
@@ -146,8 +146,8 @@ export const events: WeddingEvent[] = [
     startMinute: 0,
     venue: "Hotel Gayatri Palace, Aligarh",
     address:
-      "Shakti Nagar, Gular Road, Aligarh, Uttar Pradesh 202001",
-    plusCode: "Shakti Nagar Aligarh, Uttar Pradesh",
+      "Gular Road, Aligarh, Uttar Pradesh 202001",
+    plusCode: "Aligarh, Uttar Pradesh",
     description:
       "The day our forever begins. Witness the exchange of garlands and the sacred seven vows as two hearts unite in the presence of family, friends, and the Almighty.",
     accent: "rose",
@@ -171,8 +171,8 @@ export const events: WeddingEvent[] = [
     startMinute: 0,
     venue: "Mantra Banquet Hall",
     address:
-      "Gular Road, Shakti Nagar, Nagla Masani, Aligarh, Uttar Pradesh 202001",
-    plusCode: "Shakti Nagar Aligarh, Uttar Pradesh",
+      "Gular Road, Aligarh, Uttar Pradesh 202001",
+    plusCode: "Aligarh, Uttar Pradesh",
     description:
       "An evening to celebrate love, laughter, music, and new beginnings. Bring your smiles, your dancing shoes, and your blessings as we celebrate together!",
     accent: "sage",

@@ -8,7 +8,7 @@ export function StorySection() {
   return (
     <section
       id="story"
-      className="relative overflow-hidden px-6 py-24 sm:py-32"
+      className="relative overflow-hidden px-4 pb-16 pt-6 sm:px-6 sm:pb-32 sm:pt-10"
       aria-labelledby="story-heading"
     >
       <FloralCorner className="pointer-events-none absolute -left-2 top-10 h-28 w-28 text-sage/40 sm:left-6" />

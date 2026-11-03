@@ -151,3 +151,102 @@ export function GaneshaMotif({ className = "" }: { className?: string }) {
     </svg>
   );
 }
+
+/** Elegant side-profile Ganesha — for flanking motion accents */
+export function GaneshaSideProfile({
+  className = "",
+  flip = false,
+}: {
+  className?: string;
+  flip?: boolean;
+}) {
+  return (
+    <svg
+      viewBox="0 0 120 160"
+      className={`${className} ${flip ? "scale-x-[-1]" : ""}`}
+      aria-hidden="true"
+      fill="none"
+    >
+      {/* Crown */}
+      <path
+        d="M58 28c6-14 16-22 22-24 4 6 10 16 12 28"
+        stroke="currentColor"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+      />
+      <circle cx="80" cy="18" r="2.4" fill="currentColor" opacity="0.5" />
+
+      {/* Large ear */}
+      <path
+        d="M42 62c-18 2-28 18-20 36 6 14 22 18 32 8"
+        stroke="currentColor"
+        strokeWidth="1.35"
+        strokeLinecap="round"
+      />
+      <path
+        d="M46 70c-10 4-14 14-10 24"
+        stroke="currentColor"
+        strokeWidth="0.8"
+        opacity="0.45"
+      />
+
+      {/* Head profile */}
+      <path
+        d="M54 48c8-12 22-16 34-8 10 7 12 22 6 34-4 8-12 16-22 24"
+        stroke="currentColor"
+        strokeWidth="1.45"
+        strokeLinejoin="round"
+      />
+
+      {/* Eye */}
+      <path d="M72 68c4-3 9-2 11 2" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" />
+      <circle cx="78" cy="70" r="1.3" fill="currentColor" />
+
+      {/* Trunk curling forward */}
+      <path
+        d="M78 88c8 6 14 8 18 6 6-2 8-10 2-14-4-3-10-1-12 4"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M86 94c4 8 2 14-4 18"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+      />
+
+      {/* Tusk */}
+      <path
+        d="M74 86c-5 1-8-1-9-4"
+        stroke="currentColor"
+        strokeWidth="1.1"
+        strokeLinecap="round"
+      />
+
+      {/* Neck & shoulder */}
+      <path
+        d="M58 108c4 10 12 18 24 22"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M52 118c10 14 24 22 38 20"
+        stroke="currentColor"
+        strokeWidth="1.15"
+        strokeLinecap="round"
+        opacity="0.75"
+      />
+
+      {/* Soft lotus hint */}
+      <path
+        d="M48 148c10-8 22-10 34-8"
+        stroke="currentColor"
+        strokeWidth="0.9"
+        opacity="0.45"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}

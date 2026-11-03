@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, type CSSProperties } from "react";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 type Particle = {
@@ -12,20 +12,24 @@ type Particle = {
   drift: number;
   kind: "petal" | "heart";
   opacity: number;
+  colorClass: string;
 };
 
 function buildParticles(count: number): Particle[] {
   return Array.from({ length: count }, (_, id) => {
-    const kind: Particle["kind"] = id % 3 === 0 ? "heart" : "petal";
+    const kind: Particle["kind"] = id % 10 < 7 ? "heart" : "petal";
+    const heartColors = ["text-dusty-rose", "text-wine/50", "text-gold/70"];
     return {
       id,
-      left: (id * 17 + 11) % 100,
-      delay: ((id * 0.37) % 8),
-      duration: 9 + (id % 7),
-      size: kind === "heart" ? 10 + (id % 8) : 12 + (id % 10),
-      drift: ((id % 5) - 2) * 18,
+      left: (id * 13 + 7) % 100,
+      delay: (id * 0.29) % 10,
+      duration: 7 + (id % 9),
+      size: kind === "heart" ? 9 + (id % 12) : 11 + (id % 9),
+      drift: ((id % 7) - 3) * 22,
       kind,
-      opacity: kind === "heart" ? 0.35 + (id % 4) * 0.08 : 0.28 + (id % 5) * 0.07,
+      opacity: kind === "heart" ? 0.28 + (id % 5) * 0.09 : 0.22 + (id % 4) * 0.06,
+      colorClass:
+        kind === "heart" ? heartColors[id % heartColors.length] : "text-gold",
     };
   });
 }
@@ -55,7 +59,20 @@ function HeartIcon({ size }: { size: number }) {
 
 export function FallingPetals({ active = true }: { active?: boolean }) {
   const reduce = usePrefersReducedMotion();
-  const particles = useMemo(() => buildParticles(22), []);
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 768px), (pointer: coarse)");
+    const update = () => setIsMobile(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  const particles = useMemo(
+    () => buildParticles(isMobile ? 18 : 36),
+    [isMobile],
+  );
 
   if (!active || reduce) return null;
 
@@ -67,9 +84,7 @@ export function FallingPetals({ active = true }: { active?: boolean }) {
       {particles.map((p) => (
         <span
           key={p.id}
-          className={`falling-particle absolute top-[-10%] ${
-            p.kind === "heart" ? "text-dusty-rose" : "text-gold"
-          }`}
+          className={`falling-particle absolute top-[-10%] ${p.colorClass}`}
           style={
             {
               left: `${p.left}%`,

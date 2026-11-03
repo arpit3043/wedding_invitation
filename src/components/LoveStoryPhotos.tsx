@@ -7,7 +7,7 @@ export function LoveStoryPhotos() {
   return (
     <section
       id="our-story-photos"
-      className="border-t border-champagne/70 bg-gradient-to-b from-champagne/25 via-ivory to-blush/35 px-6 py-20 sm:py-28"
+      className="border-t border-champagne/70 bg-gradient-to-b from-champagne/25 via-ivory to-blush/35 px-4 py-14 sm:px-6 sm:py-28"
       aria-labelledby="story-photos-heading"
     >
       <SectionReveal className="mx-auto max-w-2xl text-center">
@@ -23,15 +23,17 @@ export function LoveStoryPhotos() {
         <DividerOrnament className="mt-6" />
       </SectionReveal>
 
-      <div className="mx-auto mt-12 flex max-w-3xl flex-col gap-16 sm:gap-20">
+      <div className="mx-auto mt-8 flex max-w-3xl flex-col gap-12 sm:mt-12 sm:gap-20">
         <SectionReveal className="text-center">
           <figure className="mx-auto max-w-md">
-            <div className="overflow-hidden rounded-sm border border-champagne bg-paper p-2 shadow-sm sm:p-3">
+            <div className="overflow-hidden rounded-sm border border-champagne bg-paper p-1.5 shadow-sm sm:p-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/childhood-beginnings.jpg"
                 alt="Arpit and Muskan as children"
                 className="h-auto w-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <figcaption className="mt-5">
@@ -58,12 +60,14 @@ export function LoveStoryPhotos() {
           </div>
 
           <figure className="mx-auto max-w-lg">
-            <div className="overflow-hidden rounded-sm border border-champagne bg-paper p-2 shadow-sm sm:p-3">
+            <div className="overflow-hidden rounded-sm border border-champagne bg-paper p-1.5 shadow-sm sm:p-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/couple-forever.jpg"
                 alt="Arpit and Muskan together today"
                 className="h-auto w-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <figcaption className="mt-5">

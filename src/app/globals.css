@@ -36,12 +36,31 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body), system-ui, sans-serif;
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Prevent iOS input zoom while keeping readable fields */
+input,
+textarea,
+select,
+button {
+  font-size: 16px;
+}
+
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
 }
 
 ::selection {
@@ -101,11 +120,56 @@ body {
   }
 }
 
+@keyframes ganesha-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(2deg);
+  }
+}
+
+@keyframes ganesha-float-flip {
+  0%,
+  100% {
+    transform: translateY(0) scaleX(-1) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-14px) scaleX(-1) rotate(2deg);
+  }
+}
+
+@keyframes ganesha-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 0.92;
+  }
+}
+
 .falling-particle {
   animation-name: petal-fall;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   will-change: transform, opacity;
+}
+
+.ganesha-float {
+  animation: ganesha-float 5.5s ease-in-out infinite;
+}
+
+.ganesha-float-delayed {
+  animation: ganesha-float-flip 6.5s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+
+.ganesha-breathe {
+  animation: ganesha-breathe 4.5s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -121,7 +185,15 @@ body {
     transition-duration: 0.01ms !important;
   }
 
-  .falling-particle {
+  .falling-particle,
+  .ganesha-float,
+  .ganesha-float-delayed,
+  .ganesha-breathe {
     display: none !important;
+  }
+
+  .ganesha-breathe {
+    display: block !important;
+    animation: none !important;
   }
 }
