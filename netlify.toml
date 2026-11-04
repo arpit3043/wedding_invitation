@@ -10,3 +10,4 @@
 # misconfigured UI publish dirs (e.g. "public") from serving a blank 404.
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
