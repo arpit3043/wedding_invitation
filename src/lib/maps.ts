@@ -1,6 +1,8 @@
 import type { WeddingEvent } from "@/data/wedding";
 
 export function getGoogleMapsUrl(event: WeddingEvent) {
+  if (event.mapsUrl) return event.mapsUrl;
+
   const query = encodeURIComponent(
     event.plusCode || `${event.venue}, ${event.address}`,
   );

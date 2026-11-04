@@ -19,6 +19,7 @@ export type WeddingEvent = {
   venue: string;
   address: string;
   plusCode: string;
+  mapsUrl: string;
   description: string;
   accent: "rose" | "sage" | "gold" | "wine" | "champagne";
   ritual: RitualInfo;
@@ -73,6 +74,7 @@ export const events: WeddingEvent[] = [
     address:
       "Bombay Wala Petch, Aligarh, Uttar Pradesh 202001",
     plusCode: "Aligarh, Uttar Pradesh",
+    mapsUrl: "https://maps.app.goo.gl/qB5CQsdpHZqiyRij8",
     description:
       "An evening of devotion, melodies, and heartfelt prayers. Let us begin our celebrations by seeking divine blessings for a beautiful journey ahead.",
     accent: "wine",
@@ -98,6 +100,7 @@ export const events: WeddingEvent[] = [
     address:
       "Bombay Wala Petch, Aligarh, Uttar Pradesh 202001",
     plusCode: "Aligarh, Uttar Pradesh",
+    mapsUrl: "https://maps.app.goo.gl/qB5CQsdpHZqiyRij8",
     description:
       "A beautiful day filled with traditions, laughter, colours, and togetherness. A celebration of love, friendship, and all things joyful.",
     accent: "gold",
@@ -123,6 +126,7 @@ export const events: WeddingEvent[] = [
     address:
       "Bombay Wala Petch, Aligarh, Uttar Pradesh 202001",
     plusCode: "Aligarh, Uttar Pradesh",
+    mapsUrl: "https://maps.app.goo.gl/qB5CQsdpHZqiyRij8",
     description:
       "The excitement is in the air! Join us as we celebrate this beautiful tradition and prepare for the grand wedding procession.",
     accent: "champagne",
@@ -148,6 +152,7 @@ export const events: WeddingEvent[] = [
     address:
       "Gular Road, Aligarh, Uttar Pradesh 202001",
     plusCode: "Aligarh, Uttar Pradesh",
+    mapsUrl: "https://maps.app.goo.gl/Ge3FhWXWTxwaJnGh7",
     description:
       "The day our forever begins. Witness the exchange of garlands and the sacred seven vows as two hearts unite in the presence of family, friends, and the Almighty.",
     accent: "rose",
@@ -173,6 +178,7 @@ export const events: WeddingEvent[] = [
     address:
       "Gular Road, Aligarh, Uttar Pradesh 202001",
     plusCode: "Aligarh, Uttar Pradesh",
+    mapsUrl: "https://maps.app.goo.gl/jLFjNtvRZgG6CZqa8",
     description:
       "An evening to celebrate love, laughter, music, and new beginnings. Bring your smiles, your dancing shoes, and your blessings as we celebrate together!",
     accent: "sage",
