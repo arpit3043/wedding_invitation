@@ -1,3 +1,5 @@
+import { GENERATED_DATABASE_URL } from "@/lib/generated-database-url";
+
 const PLACEHOLDER_FRAGMENTS = [
   "your_",
   "YOUR_PROJECT",
@@ -32,6 +34,12 @@ export function getSupabaseServiceRoleKey() {
 }
 
 export function getDatabaseUrl() {
-  const url = process.env.DATABASE_URL;
-  return isConfiguredSecret(url) ? url!.trim() : null;
+  // Prefer runtime env (local / Netlify UI with Functions scope).
+  // Fall back to the build-time bake — Netlify does not expose
+  // netlify.toml env vars to serverless functions at runtime.
+  const runtime = process.env.DATABASE_URL;
+  if (isConfiguredSecret(runtime)) return runtime!.trim();
+  return isConfiguredSecret(GENERATED_DATABASE_URL)
+    ? GENERATED_DATABASE_URL!.trim()
+    : null;
 }

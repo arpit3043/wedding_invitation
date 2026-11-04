@@ -4,10 +4,14 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  # Available at build time only. scripts/bake-database-url.mjs embeds this
+  # into the server bundle so /api/rsvp works (toml env is not visible to
+  # Netlify Functions at runtime). Prefer also setting DATABASE_URL in the
+  # Netlify UI with Builds + Functions scopes, then remove this value.
+  DATABASE_URL = "postgresql://postgres:Wedding%4004122026%24%24@db.thjlehavxekwefkixagf.supabase.co:5432/postgres?sslmode=require"
+  NEXT_PUBLIC_SUPABASE_URL = "https://thjlehavxekwefkixagf.supabase.co"
+  NEXT_PUBLIC_SITE_URL = "https://arpitwedsmuskan.netlify.app"
 
 # Ensures Next.js App Router, API routes, and SSR work on Netlify.
-# Netlify also auto-detects this for Next 13.5+; pinning here prevents
-# misconfigured UI publish dirs (e.g. "public") from serving a blank 404.
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-
