@@ -234,12 +234,11 @@ export async function POST(request: Request) {
     });
   }
 
-  return NextResponse.json({
-    ok: true,
-    demo: true,
-    guest_name: payload.guestName,
-    contact_number: payload.contactNumber,
-    message: payload.message,
-    attendance_status: payload.attendanceStatus,
-  });
+  return NextResponse.json(
+    {
+      error:
+        "RSVP storage is not configured. Set DATABASE_URL (or Supabase service role keys) in the host environment.",
+    },
+    { status: 503 },
+  );
 }

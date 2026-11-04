@@ -80,11 +80,18 @@ export function RSVPSection() {
       });
       const data = (await res.json()) as {
         error?: string;
+        demo?: boolean;
         attendance_status?: AttendanceStatus;
       };
 
       if (!res.ok) {
         throw new Error(data.error || "Something went wrong. Please try again.");
+      }
+
+      if (data.demo) {
+        throw new Error(
+          "RSVP could not be saved to the database. Please try again in a moment.",
+        );
       }
 
       const finalStatus = data.attendance_status || attendance;
