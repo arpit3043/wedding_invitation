@@ -35,7 +35,7 @@ export const wedding = {
   timezone: "Asia/Kolkata",
   sanskritInvocation: "॥ श्री गणेशाय नमः ॥",
   openingText:
-    "With the blessings of the Lord Shiva and the blessings of our families, we invite you to join us as we celebrate the beginning of our forever.",
+    "Under the divine blessings of Lord Shiva and surrounded by the love of our families, we invite you to grace our wedding celebration and share in the joy of the beginning of our forever.",
   supportingLine: "Two families, two hearts, one beautiful beginning.",
   togetherLine: "Together with our families",
   story: {
@@ -49,7 +49,7 @@ export const wedding = {
     attendingMessage:
       "That makes us so happy! Keep your brightest smile ready. We cannot wait to welcome you with open hearts, endless happiness, and lots of love. Your presence will make our celebrations complete. Great Welcome from Arpit & Muskan",
     decliningMessage:
-      "You are on Arpit's top priority list, and we feel truly sad that you won't be able to make it to this grand celebration. Let Arpit handle this over a call with you — he will connect with you soon. Sending you lots of love and warm wishes!",
+      "You are on Arpit's top priority list, and we feel truly sad that you won't be able to make it to this grand celebration. Let Arpit handle this over a call with you — he will connect with you soon !. Sending you lots of love and warm wishes!",
   },
   assistant: {
     name: "Ask Arpit & Muskan",
