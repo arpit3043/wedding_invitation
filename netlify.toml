@@ -1,0 +1,12 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Ensures Next.js App Router, API routes, and SSR work on Netlify.
+# Netlify also auto-detects this for Next 13.5+; pinning here prevents
+# misconfigured UI publish dirs (e.g. "public") from serving a blank 404.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
