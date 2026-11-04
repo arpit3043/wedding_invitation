@@ -1,18 +1,8 @@
 # Arpit & Muskan — Digital Wedding Invitation
 
-A premium, responsive wedding invitation for **Arpit & Muskan** (01–05 December 2026).
+A premium, responsive wedding invitation for **Arpit & Muskan** (01 December–05 December 2026).
 
-Warm ivory, champagne, dusty rose, sage, wine, and antique gold — with storytelling, live countdown, ritual explanations, Maps & Calendar links, RSVP, a private dashboard, and an in-app wedding assistant.
-
-## Quick start
-
-```bash
-npm install
-cp .env.example .env.local
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
+Open [https://arpitwedsmuskan.netlify.app/](https://arpitwedsmuskan.netlify.app/).
 
 ## Features
 
@@ -82,7 +72,3 @@ npm run build
 npm run start
 npm run lint
 ```
-
-## Deploy
-
-Deploy to Vercel (or any Next.js host). Set the same environment variables in the hosting dashboard. Point your custom domain at the deployment when ready.
