@@ -8,7 +8,8 @@
   # into the server bundle so /api/rsvp works (toml env is not visible to
   # Netlify Functions at runtime). Prefer also setting DATABASE_URL in the
   # Netlify UI with Builds + Functions scopes, then remove this value.
-  DATABASE_URL = "postgresql://postgres:Wedding%4004122026%24%24@db.thjlehavxekwefkixagf.supabase.co:5432/postgres?sslmode=require"
+  # Use Supabase pooler (IPv4). Direct db.* host is IPv6-only and fails on Netlify.
+  DATABASE_URL = "postgresql://postgres.thjlehavxekwefkixagf:Wedding%4004122026%24%24@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?sslmode=require"
   NEXT_PUBLIC_SUPABASE_URL = "https://thjlehavxekwefkixagf.supabase.co"
   NEXT_PUBLIC_SITE_URL = "https://arpitwedsmuskan.netlify.app"
 

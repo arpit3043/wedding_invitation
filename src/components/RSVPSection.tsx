@@ -78,17 +78,29 @@ export function RSVPSection() {
           attendance_status: attendance,
         }),
       });
-      const data = (await res.json()) as {
+      const raw = await res.text();
+      let data: {
         error?: string;
         demo?: boolean;
         attendance_status?: AttendanceStatus;
-      };
+      } = {};
+      if (raw) {
+        try {
+          data = JSON.parse(raw) as typeof data;
+        } catch {
+          throw new Error(
+            res.ok
+              ? "Unexpected response from the server. Please try again."
+              : "Something went wrong saving your RSVP. Please try again.",
+          );
+        }
+      }
 
       if (!res.ok) {
         throw new Error(data.error || "Something went wrong. Please try again.");
       }
 
-      if (data.demo) {
+      if (!raw || data.demo) {
         throw new Error(
           "RSVP could not be saved to the database. Please try again in a moment.",
         );

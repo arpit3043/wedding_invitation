@@ -45,38 +45,38 @@ async function upsertViaPostgres(
 ): Promise<{ row: RsvpRow; duplicate: boolean } | { error: string }> {
   const { guestName, contactNumber, message, attendanceStatus } = payload;
 
-  const existing = await dbQuery<{ id: string }>(
-    `select id
-     from public.rsvps
-     where guest_name = $1::citext
-     limit 1`,
-    [guestName],
-  );
-
-  if (!existing) {
-    return { error: "Database is not configured." };
-  }
-
-  if (existing.rows[0]) {
-    const updated = await dbQuery<RsvpRow>(
-      `update public.rsvps
-       set attendance_status = $2,
-           contact_number = $3,
-           message = $4,
-           updated_at = now()
-       where id = $1
-       returning id, guest_name::text, contact_number, message, attendance_status`,
-      [existing.rows[0].id, attendanceStatus, contactNumber, message],
+  try {
+    const existing = await dbQuery<{ id: string }>(
+      `select id
+       from public.rsvps
+       where guest_name = $1::citext
+       limit 1`,
+      [guestName],
     );
 
-    if (!updated?.rows[0]) {
-      return { error: "Unable to update your RSVP. Please try again." };
+    if (!existing) {
+      return { error: "Database is not configured." };
     }
 
-    return { row: updated.rows[0], duplicate: true };
-  }
+    if (existing.rows[0]) {
+      const updated = await dbQuery<RsvpRow>(
+        `update public.rsvps
+         set attendance_status = $2,
+             contact_number = $3,
+             message = $4,
+             updated_at = now()
+         where id = $1
+         returning id, guest_name::text, contact_number, message, attendance_status`,
+        [existing.rows[0].id, attendanceStatus, contactNumber, message],
+      );
 
-  try {
+      if (!updated?.rows[0]) {
+        return { error: "Unable to update your RSVP. Please try again." };
+      }
+
+      return { row: updated.rows[0], duplicate: true };
+    }
+
     const inserted = await dbQuery<RsvpRow>(
       `insert into public.rsvps (guest_name, attendance_status, contact_number, message)
        values ($1, $2, $3, $4)
@@ -96,23 +96,31 @@ async function upsertViaPostgres(
         : "";
 
     if (code === "23505") {
-      const again = await dbQuery<RsvpRow>(
-        `update public.rsvps
-         set attendance_status = $2,
-             contact_number = $3,
-             message = $4,
-             updated_at = now()
-         where guest_name = $1::citext
-         returning id, guest_name::text, contact_number, message, attendance_status`,
-        [guestName, attendanceStatus, contactNumber, message],
-      );
+      try {
+        const again = await dbQuery<RsvpRow>(
+          `update public.rsvps
+           set attendance_status = $2,
+               contact_number = $3,
+               message = $4,
+               updated_at = now()
+           where guest_name = $1::citext
+           returning id, guest_name::text, contact_number, message, attendance_status`,
+          [guestName, attendanceStatus, contactNumber, message],
+        );
 
-      if (again?.rows[0]) {
-        return { row: again.rows[0], duplicate: true };
+        if (again?.rows[0]) {
+          return { row: again.rows[0], duplicate: true };
+        }
+      } catch {
+        // fall through
       }
     }
 
-    return { error: "Unable to save your RSVP. Please try again." };
+    console.error("RSVP postgres upsert failed:", error);
+    return {
+      error:
+        "Unable to reach the RSVP database from the server. Please try again in a moment.",
+    };
   }
 }
 
